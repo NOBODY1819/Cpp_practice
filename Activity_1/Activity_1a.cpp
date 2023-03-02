@@ -2,8 +2,8 @@ using namespace std;
 #include<iostream>
 #include<string.h>
 
-class student
-{
+class student     //Creation of class student
+{            // Declaration of Data Members
     private: char name[20];
     private: int roll;
     private: char dob[15];
@@ -11,8 +11,9 @@ class student
     private: char branch[10];
     private: char sem[10];
     private: int sub;
-
-    public: student(){
+                    
+                    //Member functions
+    public: student(){         // Creation of Constructor
         strcpy(name,"abc");
         roll = 123;
         strcpy(dob,"01-01-2001");
@@ -22,11 +23,11 @@ class student
         sub = 5;        
     }
 
-    public: ~student(){
+    public: ~student(){     //Creation of Destructor
         cout<<"\tcalling destructor..\n"<<endl;
     }
     
-    public: void input(){
+    public: void input(){     //Creation of Input function
         cout<<"\tEnter Details for Student"<<endl;
         cout << "Enter name: ";
         cin >> name;
@@ -44,7 +45,7 @@ class student
         cin >> sub;
     
     }
-    public: void display(){
+    public: void display(){         //Creation of display function
         cout <<"\tInformation for student\n"<<endl;
        if (!strcmp(name,"abc"))
             {
@@ -65,8 +66,8 @@ class student
 int main(){
 
     cout<<"\tCreating Object...\n"<<endl;
-    student s;
-    s.display();
+    student s; //Creating object of class
+    s.display(); //calling member functions
     s.input();
     s.display();
         
