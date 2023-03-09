@@ -37,7 +37,7 @@ class course     //Creation of class course
          cout << "Enter Course Fee: ";
         cin >> c_fee;    
     }
-    public: void diaplay(){
+    public: void display(){
             //Creation of display function
         cout <<"\tInformation of Course:"<<endl;
             if (strcmp(c_name,"abc")==0)
@@ -46,7 +46,7 @@ class course     //Creation of class course
             }
         cout<<"Course name = "<<c_name<<endl;
         cout <<"Course ID = "<<c_id<<endl;
-        cout <<"Coirse sem = "<<c_sem<<endl;
+        cout <<"Course sem = "<<c_sem<<endl;
         cout <<"Course credits = "<<c_credit<<endl;
         cout <<"Course fee = "<<c_fee<<endl;        
      
@@ -57,9 +57,9 @@ int main(){
 
     cout<<"\tCreating Object...\n"<<endl;
     course c1;  //Creating object of class
-    c1.diaplay();   //calling member functions
+    c1.display();   //calling member functions
     c1.input();
-    c1.diaplay();
+    c1.display();
         
 
     return 0;
