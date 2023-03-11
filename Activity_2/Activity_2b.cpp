@@ -42,19 +42,17 @@ class student     //Creation of class student
 
 int main(){
 
-             char name[20];
-             int roll,sub;
-             char dob[15];
-             char address[20],branch[10],sem[10];             
-
-    cout<<"\n\tEnter Details for Student"<<endl;
+        char name[20],dob[15],address[20],branch[10],sem[10];             ;
+        int roll,sub;
+            
+        cout<<"\n\tEnter Details for Student"<<endl;
         cout << "Enter name: "; cin >> name;
         cout << "Enter roll no: "; cin >> roll;
         cout << "Enter DOB(format->DD-MM-YYYY): "; cin >> dob;
-         cout << "Enter Address: "; cin >> address;
-         cout << "Enter Branch: "; cin >> branch;
-         cout << "Enter sem: "; cin >> sem;
-         cout << "Enter No. of Subjects: "; cin >> sub;
+        cout << "Enter Address: "; cin >> address;
+        cout << "Enter Branch: "; cin >> branch;
+        cout << "Enter sem: "; cin >> sem;
+        cout << "Enter No. of Subjects: "; cin >> sub;
     
     student s(name,roll,dob,address,branch,sem,sub); //Creating object of class and addding values
     s.display(); //calling member functions

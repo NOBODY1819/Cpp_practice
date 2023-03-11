@@ -122,23 +122,29 @@ public:
             break;
         }
     }
+    int r_delete(int rep, student *s)
+    {
+        *this = s[rep];
+        cout << "\n---- Record deleted ----";
+        return rep - 1;
+    }
 };
 
 int main()
 {
-    int ch,count = -1,r_r, num,retr=0;
+    int ch, count = -1, r_r, num, retr = 0;
     cout << "Enter no. of students:";
     cin >> num;
     student s[10];
     do
     {
-    cout << "\n\t<-------MENU------->\nEnter\n1 -> For New Entery\n2 -> For Updating\n3 -> For Display Data\n0 -> Exit\t:";
-    cin >> ch;
+        cout << "\n\t<-------MENU------->\nEnter\n1 -> For New Entery\n2 -> For Updating\n3 -> For Display Data\n4 -> For Deleting Record\n0 -> Exit\t:";
+        cin >> ch;
 
         switch (ch)
         {
         case 1:
-            if ( count+1 == num)
+            if (count + 1 == num)
             {
                 cout << "*****Record Full******";
                 break;
@@ -155,7 +161,7 @@ int main()
 
             cout << "Enter Roll no. of student to update:";
             cin >> r_r;
-            for (int i = 0; i <=count; i++)
+            for (int i = 0; i <= count; i++)
             {
 
                 if (r_r == s[i].r_rollno())
@@ -164,8 +170,8 @@ int main()
                     goto retr;
                 }
             }
-            cout<<"***No Record Found with provided Roll No.***\n";
-            retr:
+            cout << "***No Record Found with provided Roll No.***\n";
+        retr:
             break;
 
         case 3:
@@ -176,7 +182,7 @@ int main()
             }
             cout << "Enter Roll no. of student :";
             cin >> r_r;
-            for (int i = 0; i <=count; i++)
+            for (int i = 0; i <= count; i++)
             {
 
                 if (r_r == s[i].r_rollno())
@@ -185,7 +191,26 @@ int main()
                     goto retr;
                 }
             }
-             cout<<"***No Record Found with provided Roll No.***\n";
+            cout << "***No Record Found with provided Roll No.***\n";
+            break;
+        case 4:
+            if (count == -1)
+            {
+                cout << "*****NO data in System******";
+                break;
+            }
+            cout << "Enter Roll no. of student :";
+            cin >> r_r;
+            for (int i = 0; i <= count; i++)
+            {
+
+                if (r_r == s[i].r_rollno())
+                {
+                    count = s[i].r_delete(count, s);
+                    goto retr;
+                }
+            }
+            cout << "***No Record Found with provided Roll No.***\n";
             break;
         case 0:
             cout << "\n---------> Exit Terminal <---------";
