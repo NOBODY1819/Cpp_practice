@@ -16,12 +16,11 @@ private:
     string m_name[8], m_code[8];
     // Member functions
 public:
-    student()
+    student() // default constructor
     {
-        // default constructor
     }
-    void input()
-    { // Creation of input function
+    void input() // Input function for student details
+    {
         cout << "\n\tEnter Details for Student" << endl;
         cout << "Enter name: ";
         cin >> name;
@@ -60,13 +59,13 @@ public:
     }
 
 public:
-    ~student()
-    { // Creation of Destructor
+    ~student() // Creation of Destructor
+    {
     }
 
 public:
-    void search()
-    { // Creation of search function
+    void search() // Search function to search student records
+    {
         cout << "\n\tInformation for student\n";
         cout << "Name = " << name << endl;
         cout << "Roll no. = " << roll << endl;
@@ -90,7 +89,7 @@ public:
     {
         return roll;
     }
-    void update()
+    void update() // Update function to update student records
     {
         int choice;
         cout << "\n\t--------- Update Information --------\n";
@@ -154,13 +153,13 @@ public:
             break;
         }
     }
-    int r_delete(int rep, student *s)
+    int r_delete(int rep, student *s) // Function to student delete record
     {
         *this = s[rep];
         cout << "\n---- Record deleted ----";
         return rep - 1;
     }
-    void result()
+    void result() //function for calculation of student result
     {
 
         float marks = 0, total = 0, percent;
@@ -205,7 +204,7 @@ public:
     }
 
 public:
-    void input()
+    void input()// Function to input details for course addition
     {
         cout << "\tEnter Details for Course" << endl;
         cout << "Enter Course name: ";
@@ -221,9 +220,9 @@ public:
     }
 
 public:
-    void display()
+    void display()// Display function to display course details
     {
-        // Creation of display function
+        
         cout << "\tInformation of Course:" << endl;
         cout << "Course name = " << c_name << endl;
         cout << "Course ID = " << c_id << endl;
@@ -236,9 +235,12 @@ public:
     {
         return c_id;
     }
-
+void search() // Function to show details of course
+{
+    this->display();
+}
 public:
-    void update()
+    void update() //Function to update course details
     {
         int choice;
         cout << "\n\t--------- Update Information --------\n";
@@ -288,6 +290,13 @@ public:
             break;
         }
     }
+
+    int c_delete(int rep, course *c) // Function to delete course record
+    {
+        *this = c[rep];
+        cout << "\n---- Record deleted ----";
+        return rep - 1;
+    }
 };
 
 int main()
@@ -298,7 +307,7 @@ int main()
     cout << "\n\t<---MAIN MENU--->\nEnter\n1 -> To Enter Student System\n2 -> To Enter Course System\n0 -> Exit\t:";
     cin >> ch;
 
-    if (ch == 1)
+    if (ch == 1) // Enter student system
     {
         cout << "Enter no. of students:";
         cin >> num;
@@ -408,7 +417,7 @@ int main()
             }
         } while (ch != 0);
     }
-    else if (ch == 2)
+    else if (ch == 2) // Enter course system
     {
         string c_name, c_id, c_sem, r_id;
         int c_credit, c_count = -1, c_retr, c_num;
@@ -422,66 +431,93 @@ int main()
             cout << "\n\t<-------COURSE MENU------->\nEnter\n1 -> For New Entery\n2 -> For Updating\n3 -> For Search Data\n4 -> For Deleting Record\n0 -> Exit\t:";
             cin >> ch;
 
-           
-                switch (ch)
+            switch (ch)
+            {
+            case 1: //Enter new record
+                if (c_count + 1 == c_num)
                 {
-                case 1:
-                    if (c_count + 1 == c_num)
-                    {
-                        cout << "*****Record Full******";
-                        break;
-                    }
-                    c_count++;
-                    c[c_count].input();
-                    break;
-                case 2:
-                    if (c_count == -1)
-                    {
-                        cout << "*****NO data in System******";
-                        break;
-                    }
-
-                    cout << "Enter Course Id to update:";
-                    cin >> r_id;
-                    for (int i = 0; i <= c_count; i++)
-                    {
-
-                        if (r_id == c[i].r_id())
-                        {
-                            c[i].update();
-                            goto c_retr;
-                        }
-                    }
-                    cout << "***No Record Found with provided Course ID***\n";
-                c_retr:
-                    break;
-
-                case 3:
-                    cout << "FUNCTION UNDER DEVELOPMENT";
-                //For searching 
-                case 4:
-                    cout << "FUNCTION UNDER DEVELOPMENT";
-                   //For deleting
-                    break;
-
-                case 0:
-                    cout << "\n---------> Exit Terminal <---------";
-                    break;
-
-                default:
-                    cout << "\n------Invalid choice-------\n\t*******Exit*********\n";
+                    cout << "*****Record Full******";
                     break;
                 }
-            
+                c_count++;
+                c[c_count].input();
+                break;
+            case 2:           //Update record
+                if (c_count == -1)
+                {
+                    cout << "*****NO data in System******";
+                    break;
+                }
+
+                cout << "Enter Course Id to update :";
+                cin >> r_id;
+                for (int i = 0; i <= c_count; i++)
+                {
+
+                    if (r_id == c[i].r_id())
+                    {
+                        c[i].update();
+                        goto c_retr;
+                    }
+                }
+                cout << "***No Record Found with provided Course ID***\n";
+            c_retr:
+                break;
+
+            case 3:      //Search course record 
+                if (c_count == -1)
+                {
+                    cout << "*****NO data in System******";
+                    break;
+                }
+                cout << "Enter Course Id to Search :";
+                cin >> r_id;
+                for (int i = 0; i <= c_count; i++)
+                {
+                    if (r_id == c[i].r_id())
+                    {
+                        c[i].search();
+                        goto c_retr;
+                    }
+                }
+                cout << "*** No Record Found with provided Course ID. ***\n";
+                break;
+            case 4:
+                if (c_count == -1)
+                {
+                    cout << "*****NO data in System******";
+                    break;
+                }
+                cout << "Enter Course Id to Delete :";
+                cin >> r_id;
+                for (int i = 0; i <= c_count; i++)
+                {
+                    if (r_id == c[i].r_id())
+                    {
+                        c_count = c[i].c_delete(c_count, c);
+                        goto c_retr;
+                    }
+                }
+                cout << "*** No Record Found with provided Course ID. ***\n";
+                break;
+
+            case 0:
+                cout << "\n<<--------->> Exit Terminal <<--------->>";
+                break;
+
+            default:
+                cout << "\n<------> Invalid choice <------->\n\t******* TRY AGAIN *********\n";
+                break;
+            }
         } while (ch != 0);
     }
     else if (ch == 0)
     {
-        cout << "\n---------> Exit Terminal <---------";
+        cout << "\n<<--------->> Exit Terminal <<--------->>";
     }
     else
     {
-        cout << "\n------Invalid choice-------\n\t*******Exit*********\n";
+        cout << "\n<------> Invalid choice <------->\n\t******* Exit *********\n";
     }
 
     return 0;
