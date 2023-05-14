@@ -1,0 +1,6 @@
+preetpaul,133,01-03-2003,Jammu,CSE,4th,4
+Sachin,124,13-01-2001,Jammu,ECE,5th,3
+Shivam,132,23-05-2003,Jammu,CSE,4th,4
+aditya,126,08-10-2001,Jammu,EE,5th,3
+manik,161,21-03-2003,Samba,law,4th,6
+raghav,162,15-12-2003,kot,cse,4th,4

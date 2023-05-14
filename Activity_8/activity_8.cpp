@@ -136,10 +136,11 @@ int main(){
         case 2:
         // search student record logic here
         cout<<"\nSeacrhing for student\n";
-        searchStudentRecord();
-        break;
-        cout<<"\n-->Exit Program<---\n";
-        break;
+            searchStudentRecord();
+            break;
+        case 3:
+            cout<<"\n-->Exit Program<---\n";
+            break;
         default:
         cout<<"\nInvalid choice.\n";
             break;

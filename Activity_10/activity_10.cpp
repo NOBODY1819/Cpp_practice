@@ -15,6 +15,7 @@ private:
     string branch;
     string sem;
     int sub;
+
     // Member functions
 public:
     // Constructor to initialize member variables
@@ -185,6 +186,73 @@ public:
     }
 };
 
+// Course class to represent each record
+class Course
+{
+private:
+    // Data members
+    string c_name, c_id, c_sem;
+    int c_credit;
+    float c_fee;
+public:// Member functions
+    // Constructor to initialize member variables
+    Course(string name = "abc", string id = "com-101", string sem = "1st", int credit = 10, float fee = 1000.00)
+    {
+        c_name = name;
+        c_id = id;
+        c_sem = sem;
+        c_credit = credit;
+        c_fee = fee;
+    }
+
+    // Function to print the Course record
+    void print()
+    {
+        cout << "Course Name = " << c_name << endl;
+        cout << "Course ID = " << c_id << endl;
+        cout << "Course Semester = " << c_sem << endl;
+        cout << "Course Credits = " << c_credit << endl;
+        cout << "Course Fee = " << c_fee << endl;
+    }
+
+    // Function to return Course ID
+    string r_id()
+    {
+        return c_id;
+    }
+
+    // Function to write the Course record to a file
+    void WriteToFile(ofstream &file)
+    {
+        file << c_name << "," << c_id << "," << c_sem << "," << c_credit << "," << c_fee << endl;
+    }
+
+    // Function to read the Course record from a file
+    void readFromFile(ifstream &file)
+    {
+        string line;
+        getline(file, line);
+
+        if (file.fail())
+            return;
+
+        // split the line by coma delimiter
+        int pos1 = line.find(",");
+        int pos2 = line.find(",", pos1 + 1);
+        int pos3 = line.find(",", pos2 + 1);
+        int pos4 = line.find(",", pos3 + 1);
+
+        // Extrat c_name, c_id, c_sem, c_credit and c_fee from the line
+
+        c_name = line.substr(0, pos1);
+        c_id = line.substr(pos1 + 1, pos2 - pos1 - 1);
+        c_sem = line.substr(pos2 + 1, pos3 - pos2 - 1);
+        c_credit = stoi(line.substr(pos3 + 1, pos4 - pos3 - 1));
+        c_fee = stof(line.substr(pos4 + 1));
+    }
+
+};
+
 // Function to add a new student record to file
 void addStudentRecord()
 {
@@ -205,7 +273,7 @@ void addStudentRecord()
     string sem;
     int sub;
     fflush(stdin);
-    cout << "\n\tEnter Details for Student" << endl;
+    cout << "\n\tEnter Details for course" << endl;
     cout << "Enter name: ";
     cin >> name;
     cout << "Enter roll no: ";
@@ -310,14 +378,100 @@ void editStudentRecord(int n)
     }
 }
 
+// Function to add new course to file
+void addCourseRecord()
+{
+ofstream file("courses.txt", ios_base::app);
+
+    if (!file.is_open())
+    {
+        cout << "Error opening file" << endl;
+        return;
+    }
+
+    // Get input from user
+    string name;
+    string id;
+    string sem;
+    int credit;
+    float fee;
+    fflush(stdin);
+    cout << "\n\tEnter Details for course" << endl;
+    cout << "Enter Course Name: ";
+    cin >> name;
+    cout << "Enter Course ID: ";
+    cin >> id;
+    cout << "Enter Course Semester: ";
+    cin >> sem;
+    cout << "Enter Crouse Credits: ";
+    cin >> credit;
+    cout << "Enter Course fee: ";
+    cin >> fee;
+
+    // Create a new Course object and write it to file
+    Course course(name, id, sem, credit, fee);
+    course.WriteToFile(file);
+
+    file.close();
+}
+
+// Function to search for course in the file
+void searchCourseRecord()
+{
+ ifstream file("courses.txt");
+
+    if (!file.is_open())
+    {
+        cout << "Error opening file" << endl;
+        return;
+    }
+
+    // Get input from user
+    string id;
+    cout << "Enter Course ID to search : ";
+    cin >> id;
+
+    // Read each record from file and check for the Course ID
+    Course course;
+    bool found = false;
+    while (file.good())
+    {
+        course.readFromFile(file);
+
+        if (file.eof())
+            break; // Exit loop if end of file is reached
+
+        if (course.r_id() == id)
+        {
+            cout << "\n\tCourse record found " << endl;
+            course.print();
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\n\tCourse record not found" << endl;
+    }
+
+    file.close();
+}
+
 // Main function to call other functions
 int main()
 {
     int choice;
+    cout << "\n\t<---MAIN MENU--->\nEnter\n1 -> To Enter Student System\n2 -> To Enter Course System\n0 -> Exit\t:";
+    cin >> choice;
 
+    if (choice==1)
+    {
+    
     do
     {
         cout << endl;
+        cout<<"<-----STUDENT MENU---->\n";
         cout << "1. Add student record\n2. Search student record\n3. Edit student record\n4. Delete student record\n5. Exit\nEnter choice : ";
         cin >> choice;
         switch (choice)
@@ -348,6 +502,43 @@ int main()
             break;
         }
     } while (choice != 5);
-
+    
+    }else if (choice==2)    
+    {
+        
+    do
+    {
+        cout << endl;
+        cout<<"<----COURSE MENU----->\n";
+        cout << "1. Add Course record\n2. Search Course record\n3. Exit\nEnter choice : ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            // Add student record logic here
+            cout << "\nAdding New Course Record\n";
+            addCourseRecord();
+            break;
+        case 2:
+            // Search Course record logic here
+            cout << "\nSeacrhing for Course\n";
+            searchCourseRecord();
+            break;
+        case 3:
+            cout << "\n-->Exit Program<---\n";
+            break;
+        default:
+            cout << "\nInvalid choice.\n";
+            break;
+        }
+    } while (choice != 3);
+    
+    }else if(choice==0){
+        cout<<"\n\t<----> EXIT PROGRAM <----->";
+    }else
+    {
+        cout<<"\n<---> INVALID CHOICE <---->\n*** EXIT PROGRAM ***";
+    }
+    
     return 0;
 }
