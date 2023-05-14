@@ -110,43 +110,43 @@ public:
                 break;
 
             case 2:
-                cout << "\n\n Enter Roll No. :--->";
+                cout << "\n Enter Roll No. :--->";
                 cin >> roll;
                 cout << "\t---- Roll No. Updated ----\n";
                 break;
 
             case 3:
-                cout << "\n\n Enter Date Of Birth  :--->";
+                cout << "\n Enter Date Of Birth  :--->";
                 cin >> roll;
                 cout << "\t---- Date Of Birth Updated ----\n";
                 break;
 
             case 4:
-                cout << "\n\n Enter Address :--->";
+                cout << "\n Enter Address :--->";
                 cin >> address;
                 cout << "\t---- Adress Updated ----\n";
                 break;
 
             case 5:
-                cout << "\n\n Enter Branch :--->";
+                cout << "\n Enter Branch :--->";
                 cin >> branch;
                 cout << "\t---- Branch Updated ----\n";
                 break;
 
             case 6:
-                cout << "\n\n Enter Semester :--->";
+                cout << "\n Enter Semester :--->";
                 cin >> sem;
                 cout << "\t---- Semested Updated ----\n";
                 break;
 
             case 7:
-                cout << "\n\n Enter No. of Subjects :--->";
+                cout << "\n Enter No. of Subjects :--->";
                 cin >> sub;
                 cout << "\t---- No. of Subjects Updated ----\n";
                 break;
 
             default:
-                cout << "\n\n ------ Invalid Choice ------\n ******** Try again ********\n\n";
+                cout << "\n ------ Invalid Choice ------\n ******** Try again ********\n\n";
                 break;
             }
         }
@@ -157,7 +157,7 @@ public:
             cout << "\nRecord Deleted\n";
         }
 
-        file.seekg(0);
+        file.seekg(0); // return file poonter to begining;
         while (!file.eof())
         {
             string f_line;

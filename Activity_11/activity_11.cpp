@@ -257,8 +257,8 @@ public:// Member functions
 
         string old_line = c_name + "," + c_id + ","+ c_sem+","+to_string(c_credit)+","+to_string(c_fee);
         ofstream t_file("temp.txt");
-        if (mod == 1)
-        {
+        if (mod == 1)   // check wether to delete of modify (mod = 1 -> modify, mod = 2 -> delete)
+        {  // if mod = 1 ask for what to modify
             int choice;
             cout << "\n\t--------- Modify Information --------\n";
             cout << "\n\t------> Choose the Index of Details You Want to Update <-------\n";
@@ -308,37 +308,37 @@ public:// Member functions
             }
         }
         else
-        {
+        {   // if mod=2, before deletion display course information
 
             this->print();
             cout << "\nRecord Deleted\n";
         }
 
-        file.seekg(0);
+        file.seekg(0);  // set file pointer to begining
         while (!file.eof())
         {
             string f_line;
-            file>>f_line>>ws;
+            file>>f_line>>ws; // get each line without trailing spaces
             
             string New_line = c_name + "," + c_id + ","+ c_sem+","+to_string(c_credit)+","+to_string(c_fee);
             if (f_line == old_line)
             {
                 if (mod == 2)
-                {
+                { // if mod=2, no need to add matched line in new file, i.e line is to be deleted 
                     continue;
                 }
 
                 t_file << New_line << endl;
             }
             else
-            {
+            {  // add allother lines to temp file
                 t_file << f_line << endl;
             }
         }
         t_file.close();
-        file.close();
-        remove("courses.txt");
-        rename("temp.txt", "courses.txt");
+        file.close();   //close files
+        remove("courses.txt");    // remove old file 
+        rename("temp.txt", "courses.txt");  //rename temp.txt file to courses.txt
     }
 };
 
