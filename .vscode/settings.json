@@ -1,0 +1,8 @@
+{
+    "code-runner.runInTerminal": true,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "code-runner.executorMap": {
+        "cpp": "g++ \"$fileName\" -o \"$fileNameWithoutExt\" && .\\$fileNameWithoutExt"
+    },
+    "cmake.sourceDirectory": "D:/Programming/C++_programing/Cpp_practice/cmake-practice"
+}

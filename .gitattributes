@@ -2,4 +2,4 @@
 * text=auto
 
 *.exe
-**/.vscode/
+.vscode/
