@@ -1,3 +1,0 @@
-D:/Programming/C++_programing/Cpp_practice/cpp_test/build/CMakeFiles/hello.dir
-D:/Programming/C++_programing/Cpp_practice/cpp_test/build/CMakeFiles/edit_cache.dir
-D:/Programming/C++_programing/Cpp_practice/cpp_test/build/CMakeFiles/rebuild_cache.dir
