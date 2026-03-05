@@ -11,6 +11,7 @@ void trim_spaces(std::string &line); //trims leading/trailing spaces
 bool valid_key(const std::string& key); // check if key has spaces or isempty
 void load_store(std::unordered_map<std::string, std::string> &store); // load the data from file to store
 void save_store(const std::unordered_map<std::string, std::string> &store); // sace the data from store to file
+std::string lower(std::string word);
 
 int main()
 {
@@ -54,11 +55,12 @@ int main()
       std::cout << "\tget/g <key>          - retrieve value for key\n";
       std::cout << "\tdelete/d <key>       - remove key\n";
       std::cout << "\trename/rn <old_key> <new_key> - update <old_key> to <new_key>\n";
-      std::cout << "\thelp                 - shows available commands\n";
+      std::cout << "\tsearch/srch/f <key>   - search <key> in store\n";
       std::cout << "\tlist                 - show stored key-value paired\n";
       std::cout << "\tcount                - show the number of keys\n";
       std::cout << "\tclear                - clear the store\n";
       std::cout << "\tsave                 - save to the store\n";
+      std::cout << "\thelp                 - shows available commands\n";
       std::cout << "\tquit                 - exit the program\n";
     }
     else if(command == "list") // view key-values
@@ -197,6 +199,39 @@ int main()
       store.erase(old_key);   
       std::cout << "renamed: \"" << old_key << "\" (" << it->second << ") -> \"" << new_key << "\"\n\n";
     }
+    else if(command == "search" || command == "srch" || command == "f"){
+      if(first_space==std::string::npos){
+        std::cout << "error 51: no substring key provied.\n\tusage: search/srch/f <key>\n\n";
+        continue;
+      }
+      
+      std::string term = line.substr(first_space+1);
+      trim_spaces(term);
+
+      if(term.empty()){
+        std::cout << "error52: search term cannot be empty.\n\t usage: search/srch/f <key>\n\n";
+        continue;
+      }
+      if(!valid_key(term)){
+        continue;
+      }
+      term = lower(term);
+      int match_found = 0;
+      std::cout<< "Searching for \"" <<term <<"\" ...\n";
+
+      for(const auto &pair: store){
+        std::string key = lower(pair.first);
+        if(key.find(term) != std::string::npos){
+          std::cout << "\"" <<pair.first <<"\" -> \"" <<pair.second <<"\"\n";
+          match_found++;
+      }}
+      if(match_found==0){
+        std::cout<<"No match found\n\n";
+      }else{
+        std::cout << "\n Found "<< match_found<< " match(es).\n";
+      }
+      std::cout<<"\n";
+    }
     else
     {
       std::cout << "unknown command: " << line << "\n type 'help' for avilable commands.\n\n";
@@ -265,4 +300,12 @@ void save_store(const std::unordered_map<std::string, std::string>& store){
   std::cout<<"saved " << store.size() << " entries to store.txt\n\n";
   store_file.close();
   return;
+}
+
+std::string lower(std::string word){
+  std::string str;
+  for(char &c: word){
+    str += static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+  }
+  return str;
 }
