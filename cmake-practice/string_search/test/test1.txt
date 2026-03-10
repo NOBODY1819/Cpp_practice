@@ -1,0 +1,29 @@
+# Basic exact matches
+hello world hello     hello     0
+hello world hello     world     6
+hello world hello     again     -1
+
+# Repeated patterns
+ababababab            ab        0
+ababababab            baba      1
+aaaaaaa               aaa       0
+
+# Empty pattern (should match at start position)
+this is a test        ""        0
+
+# Pattern longer than text
+short                 longpattern   -1
+
+# No match
+abcdef                xyz       -1
+
+# Overlapping matches
+mississippi           issi      1
+
+# Case-sensitive (algorithms are case-sensitive by default)
+Hello World           hello     -1
+Hello World           Hello     0
+
+# Single character
+banana                a         1
+banana                z         -1
