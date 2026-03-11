@@ -1,0 +1,52 @@
+# Medium test file for string search algorithms - 100+ cases
+# Format: text pattern expected_position
+# -1 = not found
+
+hello world hello | hello | 0
+hello world hello | world | 6
+hello world hello | again | -1
+ababababab | ab | 0
+ababababab | baba | 1
+aaaaaaa | aaa | 0
+aaaaaaa | aaaaaaaa | -1
+this is a test | test | 10
+this is a test | xyz | -1
+mississippi | issi | 1
+mississippi | sip | 6
+mississippi | sippi | 6
+mississippi | miss | 0
+mississippi | ippi | 7
+mississippi | ppi | 8
+mississippi | ss | 2
+mississippi | i | 1
+empty pattern test |  | 0
+very short | longpatternthatdoesnotfit | -1
+abc | abc | 0
+abc | abcd | -1
+abcdeabcdeabcde | abcde | 0
+abcdeabcdeabcde | bcdea | 1
+abcdeabcdeabcde | cdeab | 2
+abcdeabcdeabcde | deabc | 3
+abcdeabcdeabcde | eabcd | 4
+abcdeabcdeabcde | abcdea | 0
+abcdeabcdeabcde | xyz | -1
+a very long sentence with many repeated words like hello hello hello hello hello | hello | 51
+a very long sentence with many repeated words like hello hello hello hello hello | sentence | 12
+a very long sentence with many repeated words like hello hello hello hello hello | repeated | 31
+a very long sentence with many repeated words like hello hello hello hello hello | words | 40
+a very long sentence with many repeated words like hello hello hello hello hello | like | 46
+a very long sentence with many repeated words like hello hello hello hello hello | xyz | -1
+banana | ana | 1
+banana | nan | 2
+banana | ban | 0
+banana | anana | 1
+banana | banan | 0
+banana | nana | 2
+banana | a | 1
+banana | b | 0
+banana | z | -1
+supercalifragilisticexpialidocious | fragilistic | 9
+supercalifragilisticexpialidocious | super | 0
+supercalifragilisticexpialidocious | docious | 27
+supercalifragilisticexpialidocious | xyz | -1
+# End of test cases
