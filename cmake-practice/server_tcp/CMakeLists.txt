@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.10)
-project(TcpEchoServer)
+cmake_minimum_required(VERSION 3.14)
+project(TcpWebSocketEchoServer)
 
-add_executable(server main.cpp)
+set(CMAKE_CXX_STANDARD 17)
 
-target_compile_features(server PRIVATE cxx_std_17)
+add_executable(server main.cpp websocket_helper.cpp)
+
 target_link_libraries(server PRIVATE ws2_32)
